@@ -28,7 +28,7 @@ where
     let temp_dir = tempfile::tempdir().unwrap();
     let output_file = temp_dir.path().join("compilation_output.spv");
 
-    let mut command = Command::new(concat!(env!("OUT_DIR"), "/glslang_validator"));
+    let mut command = Command::new("/Users/sam/glslang_validator");
     command.arg("-V");
     command.arg("-l");
     command.arg("-o").arg(&output_file);
@@ -49,11 +49,13 @@ where
         };
 
         let file_path = temp_dir.path().join(format!("{}{}", num, extension));
+
         File::create(&file_path)
             .unwrap()
             .write_all(source.as_bytes())
             .unwrap();
         command.arg(file_path);
+
     }
 
     let output = command
